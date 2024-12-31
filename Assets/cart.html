@@ -75,15 +75,19 @@
 
             <button class="bg-dark add_to_cart px-2 py-1 fw-bold text-white container-fluid mt-3">ADD TO CART</button>
 
-            <div class="d-flex d-none">
-                <div class="counter-container  d-flex " style="width: 120px; ">
+            <div class="d-flex  mt-3 col-lg-12  d-none justify-content-between" id="inner_btn" style="height: 30px;">
+                <div class="counter-container col-lg-6 col-6 d-flex "  >
 
-                    <div class="buttons float-start text-center d-flex  active"  style="width: 80px;height: 30px;">
-                        <button onclick="decrement('summary')">-</button>
+                    <div class="buttons justify-content-between px-4   col-lg-10 text-center d-flex  active"  >
+                        <button class="fw-bold " onclick="decrement('summary')">-</button>
                         <div id="counter-summary">1</div>
-                        <button onclick="increment('summary')">+</button>
+                        <button class="fw-bold" onclick="increment('summary')">+</button>
                     </div>
                 </div>
+                <div class="right "  >
+                    <button class="btn-sm col-lg-12 h-50 go_to_cart"> <i class="fa fa-shopping-cart me-2  mt-2 text-white" style="font-size:14px"></i><p class="mt-4">GO TO CART</p></button>
+                </div>
+                
             </div>
         </div>
        

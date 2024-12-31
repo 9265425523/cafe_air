@@ -8,12 +8,18 @@ var back_btn=document.getElementById("back_btn");
 var select=document.getElementById("select");
 var clickable=document.getElementById("clickable");
 var weightRadios = document.querySelectorAll(".weight-radio");
+var go_to_cart=document.querySelector(".go_to_cart");
 var add_to_cart=document.querySelector(".add_to_cart");
 var showerror=document.getElementById("showerror");
+var inner_btn=document.querySelector("#inner_btn");
 
 back_btn.addEventListener("click",function(){
    window.location.href="food.html";
 })
+
+go_to_cart.addEventListener("click",function(){
+    window.location.href="all_cart.html";
+ })
 
 
 weightRadios.forEach(function (radio) {
@@ -22,6 +28,12 @@ weightRadios.forEach(function (radio) {
            // clickable.value = radio.id; // Update with the ID (e.g., "500g" or "1kg")
            clickable.value=1;
            showerror.textContent="";
+
+          add_to_cart.addEventListener("click",function(){
+            inner_btn.classList.remove("d-none");
+            add_to_cart.classList.add("d-none");
+          })
+
        }
    });
    

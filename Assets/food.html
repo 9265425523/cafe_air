@@ -102,13 +102,17 @@
                      
                     <a class="list-group-item   list-group-item-action border-0 border-bottom rounded-0"
                           id="dropdownMenuLink" >Food</a>
-
+                          <a class="list-group-item   list-group-item-action border-0 border-bottom rounded-0"
+                          id="dropdownMenuLink" >Baar</a>
+                          <a class="list-group-item   list-group-item-action border-0 border-bottom rounded-0"
+                          id="dropdownMenuLink" >Drinks</a>
+                          
                         
                     <a class="list-group-item dropdown-toggle  list-group-item-action border-0 border-bottom rounded-0" data-bs-toggle="dropdown" href="#bar">Bar</a>
-                    <ul class="dropdown-menu container border-0 "  aria-labelledby="dropdownMenuLink" id="bar"><li><a href="">Cocktails</a></li>
-                        <li><a href="">Beer</a></li>
-                        <li><a href="">Rum</a></li>
-                        <li><a href="">Gin</a></li>
+                    <ul class="dropdown-menu container shadow  "  aria-labelledby="dropdownMenuLink" id="bar"><li><a href="">Cocktails</a></li>
+                        <li><a class="list-group-item-action" href="#beer" onclick="beer()">Beer</a></li>
+                        <li><a class="list-group-item-action" href="">Rum</a></li>
+                        <li><a class="list-group-item-action" href="">Gin</a></li>
                     </ul>
                      
                 </div>
@@ -204,7 +208,40 @@
                 </div>
             </div>
 
+            <div class="beer mt-5 d-none" id="beer">
+                <div class="title mt-3 d-flex justify-content-between" id="beer_click" style="cursor: pointer;">
+                    <h4 class="fw-bold">Beer</h4>
+                    <i class='fa fa-angle-up fw-bold  me-3' id="beer_icon" style='font-size:30px;color:rgb(8, 8, 8)'></i>
+                </div>
 
+                
+                <div class="beer-section">
+                    <div class="cart border-bottom d-flex mt-3 pb-2 justify-content-between">
+                        <div class="left">
+                            <span class="fw-bold"><img src="Image/ic_veg.svg" class="me-2" alt="" width="15px">Corona</span>
+                        </div>
+                        <div class="right">
+                             <!-- <div class="top">
+                                <p  style="font-size: 12px;">500</p>
+                             </div> -->
+                             <div class="bottom">
+                                <button class="btn main_add_btn border-0 text-success add" class="btn btn-primary">Add
+                                +</button>
+
+                                <div class="counter-container ">
+                                    <div class="buttons border-0 float-start text-center d-flex d-none active">
+                                        <button onclick="decrement('card-2')">-</button>
+                                        <div id="counter-card-2">1</div>
+                                        <button  onclick="increment('card-2')" class="fw-bold text-success">+</button>
+                                    </div>
+                                </div>
+                             </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
             <div class="extra-info mt-5">
                 <div class="title">
                     <h6 class="text-start">Extra Info:</h6>
@@ -315,7 +352,7 @@
                     <p>Extra charges may apply</p>
                 </div>
                 <div class="right">
-                    <button class="btn-sm">MY ORDER <i class="fa mx-2 fa-caret-right"></i></button>
+                    <button class="btn-sm my_order">MY ORDER <i class="fa mx-2 fa-caret-right"></i></button>
                 </div>
             </div>
         </div>
@@ -325,13 +362,30 @@
 </body>
 <script>
     var bowl_click = document.getElementById("bowl_click");
+    var menubar = document.getElementsByClassName("menubar");
+    var beer_click=document.getElementById("beer_click");
+    var my_order=document.querySelector(".my_order");
+    var beer_section = document.getElementsByClassName("beer-section");
+    // var beer_part = document.getElementsById("beer");
+    var beer_part=document.querySelector("#beer");
+    var beer_icon = document.getElementById("beer_icon");
     var cocktails = document.getElementById("bowl");
     var hide_ = document.getElementsByClassName("bowl");
     var add = document.getElementById("add+");
     var menu_btn = document.querySelector(".menu_btn");
     var menubar = document.querySelector(".menubar");
+    var body_any_part_select=document.querySelectorAll("body");
+
+    my_order.addEventListener("click",function(){
+   window.location.href="all_cart.html";
+})
+   function beer(){
+        beer_part.classList.remove("d-none");
+        menubar.classList.add("d-none");
+   }
 
     menu_btn.addEventListener("click", function () {
+        menubar.classList.remove("d-none");
         if (menubar.style.display === "block") {
             menubar.style.display = "none"; // Hide the menu
         } else {
@@ -349,9 +403,60 @@
         cocktails.style.transform = (cocktails.style.transform === "rotate(180deg)") ? "rotate(0deg)" : "rotate(180deg)";
     });
 
+    beer_icon.addEventListener("click", function () {
+        Array.from(beer_section).forEach(function (element) {
+            element.style.display = (element.style.display === "none") ? "block" : "none";
+
+        });
+        beer_icon.style.transform = (beer_icon.style.transform === "rotate(180deg)") ? "rotate(0deg)" : "rotate(180deg)";
+    });
+
+    
+
     add.addEventListener("click", function () {
         window.location.href = "cart.html";
     });
+
+
+            const addButton = document.querySelector(".main_add_btn");
+            const buttonsDiv =document.querySelector(".buttons");
+            
+       
+        // Counter buttons dikhana aur "Add" button chhupana
+
+        // addButton.classList.add("d-none");
+        // buttonsDiv.classList.remove("d-none");
+
+    addButton.addEventListener("click",function(){
+        addButton.classList.add("d-none");
+        buttonsDiv.classList.remove("d-none");
+    })
+        function increment(cardId) {
+        const counter = document.getElementById(`counter-${cardId}`);
+        let count = parseInt(counter.innerText);
+        count++;
+        counter.innerText = count;
+    }
+
+    function decrement(cardId) {
+        const counter = document.getElementById(`counter-${cardId}`);
+        let count = parseInt(counter.innerText);
+        if (count > 1) {
+            count--;
+            counter.innerText = count;
+        } else {
+            // Counter buttons chhupana aur "Add" button dikhana
+            const card = document.getElementById(cardId);
+            const addButton = document.querySelector(".main_add_btn");
+            const buttonsDiv = document.querySelector(".buttons");
+
+            addButton.classList.remove("d-none");
+            buttonsDiv.classList.add("d-none");
+        }
+    }
+
+
+   
 </script>
 
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
